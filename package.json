@@ -1,0 +1,19 @@
+{
+  "name": "subtitle-utils",
+  "version": "1.0.0",
+  "description": "Simple subtitle utils.",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest --env=node",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "jest": "^23.4.2",
+    "rollup": "^0.63.4"
+  },
+  "dependencies": {
+    "common-tags": "^1.8.0"
+  }
+}
