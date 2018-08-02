@@ -1,6 +1,20 @@
-import ISubtitle from "./interface";
 import { stripIndents } from "common-tags";
-import parseTimestamps from "./parseTimestamps";
+import { parseTimestamps, toSRTTime, toVTTTime } from "./times";
+
+/**
+ * @typedef {Object} Time
+ * @property {string} hour
+ * @property {string} minute
+ * @property {string} second
+ * @property {string} millisecond
+ */
+
+/**
+ * @typedef {Object} ISubtitle
+ * @property {Time} start
+ * @property {Time} end
+ * @property {string} text
+ */
 
 /**
  * Subtitle is a data structure of a full subtitle file.
@@ -75,9 +89,9 @@ export default class Subtitle {
       .replace(/\n{3,}/g, "\n\n");
 
     if (transformed.length < 6) {
-      throw new Error("not a valid WebVTT");
+      throw new Error("WebVTT data is too short");
     } else if (transformed.slice(0, 6) !== "WEBVTT") {
-      throw new Error("not a valid WebVTT");
+      throw new Error("does not have a valid WebVTT header");
     }
 
     const splited = transformed
@@ -128,7 +142,7 @@ export default class Subtitle {
 
         return stripIndents`
         ${index + 1}
-        ${subtitle.start} --> ${subtitle.end}
+        ${toSRTTime(subtitle.start)} --> ${toSRTTime(subtitle.end)}
         ${subtitle.text}
       `;
       })
@@ -153,7 +167,7 @@ export default class Subtitle {
       this.subtitles
         .map(subtitle => {
           return stripIndents`
-            ${subtitle.start} --> ${subtitle.end}
+            ${toVTTTime(subtitle.start)} --> ${toVTTTime(subtitle.end)}
             ${subtitle.text}
           `;
         })
