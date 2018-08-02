@@ -5,6 +5,8 @@ A simple utils for subtitle such as SRT, WebVTT.
 ## Example
 
 ```javascript
+const Subtitle = require('subtitle-utils');
+
 const exampleSRT = `
   1
   00:02:17,440 --> 00:02:20,375
@@ -29,4 +31,18 @@ npm install subtitle-utils
 
 ## API
 
-Working
+### `static Subtitle.fromSRT(data: string): Subtitle`
+
+Create a Subtitle instance from SubRip SRT subtitle.
+
+### `static Subtitle.fromVTT(data: string): Subtitle`
+
+Create a Subtitle instance from WebVTT subtitle.
+
+### `Subtitle.toSRT(data: string): string`
+
+Returns SubRip SRT subtitle value.
+
+### `Subtitle.toVTT(data: string): string`
+
+Returns WebVTT subtitle value;
