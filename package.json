@@ -2,7 +2,17 @@
   "name": "subtitle-utils",
   "version": "1.0.0",
   "description": "Simple subtitle utils.",
-  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drakang4/subtitle-utils"
+  },
+  "keywords": [
+    "subtitle",
+    "srt",
+    "vtt"
+  ],
+  "main": "dist/bundle.cjs.js",
+  "author": "Heeryong Kang",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
