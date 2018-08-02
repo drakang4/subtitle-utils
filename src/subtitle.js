@@ -1,5 +1,6 @@
 import ISubtitle from "./interface";
 import { stripIndents } from "common-tags";
+import parseTimestamps from "./parseTimestamps";
 
 /**
  * Subtitle is a data structure of a full subtitle file.
@@ -30,23 +31,24 @@ export default class Subtitle {
       return new Subtitle([]);
     }
 
-    const splited = stripIndents(data)
+    const transformed = stripIndents(data)
       .trim()
+      .replace(/\u0000/g, "\uFFFD")
       .replace(/\r\n/g, "\n")
-      .replace(/\n{3,}/g, "\n\n")
-      .split("\n\n");
+      .replace(/\r/g, "\n")
+      .replace(/\n{3,}/g, "\n\n");
 
-    const timeReg = /^((?:\d{2,}:)?\d{2}:\d{2}[,.]\d{3}) --> ((?:\d{2,}:)?\d{2}:\d{2}[,.]\d{3})(?: (.*))?$/;
+    const splited = transformed.split("\n\n");
 
     const subtitles = splited.map(subtitle => {
       const rows = subtitle.split("\n");
       const [_, time, ...texts] = rows;
 
-      const parsedTime = timeReg.exec(time);
+      const { start, end } = parseTimestamps(time);
 
       const text = texts.join("\n");
 
-      return new ISubtitle(parsedTime[1], parsedTime[2], text);
+      return new ISubtitle(start, end, text);
     });
 
     return new Subtitle(subtitles);
@@ -61,7 +63,40 @@ export default class Subtitle {
    * @memberof Subtitle
    */
   static fromVTT(data) {
-    return new Subtitle([]);
+    if (!data) {
+      return new Subtitle([]);
+    }
+
+    const transformed = stripIndents(data)
+      .trim()
+      .replace(/\u0000/g, "\uFFFD")
+      .replace(/\r\n/g, "\n")
+      .replace(/\r/g, "\n")
+      .replace(/\n{3,}/g, "\n\n");
+
+    if (transformed.length < 6) {
+      throw new Error("not a valid WebVTT");
+    } else if (transformed.slice(0, 6) !== "WEBVTT") {
+      throw new Error("not a valid WebVTT");
+    }
+
+    const splited = transformed
+      .slice(6)
+      .trim()
+      .split("\n\n");
+
+    const subtitles = splited.map(subtitle => {
+      const rows = subtitle.split("\n");
+      const [time, ...texts] = rows;
+
+      const { start, end } = parseTimestamps(time);
+
+      const text = texts.join("\n");
+
+      return new ISubtitle(start, end, text);
+    });
+
+    return new Subtitle(subtitles);
   }
 
   // /**
@@ -83,19 +118,24 @@ export default class Subtitle {
    * @memberof Subtitle
    */
   toSRT() {
-    const subtitles = this.subtitles;
+    if (!this.subtitles || this.subtitles.length === 0) {
+      throw new Error("Cannot stringify empty subtitle");
+    }
 
-    return subtitles
+    const stringified = this.subtitles
       .map((subtitle, index) => {
         subtitle.removeStyle();
 
         return stripIndents`
-          ${index + 1}
-          ${subtitle.start} --> ${subtitle.end}
-          ${subtitle.text}
-        `;
+        ${index + 1}
+        ${subtitle.start} --> ${subtitle.end}
+        ${subtitle.text}
+      `;
       })
-      .join("\n\n");
+      .join("\n\n")
+      .concat("\n\n");
+
+    return stringified;
   }
 
   /**
@@ -105,7 +145,23 @@ export default class Subtitle {
    * @memberof Subtitle
    */
   toVTT() {
-    return "";
+    if (!this.subtitles || this.subtitles.length === 0) {
+      throw new Error("Cannot stringify empty subtitle");
+    }
+
+    const stringified = "WEBVTT\n\n".concat(
+      this.subtitles
+        .map(subtitle => {
+          return stripIndents`
+            ${subtitle.start} --> ${subtitle.end}
+            ${subtitle.text}
+          `;
+        })
+        .join("\n\n")
+        .concat("\n\n")
+    );
+
+    return stringified;
   }
 
   // /**
