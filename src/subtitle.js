@@ -62,7 +62,7 @@ export default class Subtitle {
 
       const text = texts.join("\n");
 
-      return new ISubtitle(start, end, text);
+      return { start, end, text };
     });
 
     return new Subtitle(subtitles);
@@ -107,7 +107,7 @@ export default class Subtitle {
 
       const text = texts.join("\n");
 
-      return new ISubtitle(start, end, text);
+      return { start, end, text };
     });
 
     return new Subtitle(subtitles);
@@ -138,13 +138,11 @@ export default class Subtitle {
 
     const stringified = this.subtitles
       .map((subtitle, index) => {
-        subtitle.removeStyle();
-
         return stripIndents`
-        ${index + 1}
-        ${toSRTTime(subtitle.start)} --> ${toSRTTime(subtitle.end)}
-        ${subtitle.text}
-      `;
+          ${index + 1}
+          ${toSRTTime(subtitle.start)} --> ${toSRTTime(subtitle.end)}
+          ${subtitle.text}
+        `;
       })
       .join("\n\n")
       .concat("\n\n");
