@@ -17,12 +17,16 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest --env=node",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "posttest": "codecov"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage/",
+    "collectCoverage": true
   },
   "devDependencies": {
+    "codecov": "^3.0.4",
     "jest": "^23.4.2",
     "rollup": "^0.63.4"
   },
