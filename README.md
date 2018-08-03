@@ -2,6 +2,9 @@
 
 A simple utils for subtitle such as SRT, WebVTT.
 
+[![Build Status](https://travis-ci.org/drakang4/subtitle-utils.svg?branch=master)](https://travis-ci.org/drakang4/subtitle-utils)
+[![codecov](https://codecov.io/gh/drakang4/subtitle-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/drakang4/subtitle-utils)
+
 ## Example
 
 ```javascript
