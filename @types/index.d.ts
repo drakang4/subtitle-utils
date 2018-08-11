@@ -1,6 +1,6 @@
 export as namespace SubtitleUtils;
 
-export = Subtitle;
+export default Subtitle;
 
 declare class Subtitle {
   constructor(subtitles: Subtitle.ISubtitle[]);
