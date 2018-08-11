@@ -1,4 +1,4 @@
-const Subtitle = require("../dist/bundle.cjs");
+const Subtitle = require("../lib/index.js");
 
 const exampleSRT = `1
 00:02:17,440 --> 00:02:20,375
