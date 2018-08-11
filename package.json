@@ -1,6 +1,6 @@
 {
   "name": "subtitle-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple subtitle utils.",
   "repository": {
     "type": "git",
@@ -11,9 +11,14 @@
     "srt",
     "vtt"
   ],
-  "main": "dist/bundle.cjs.js",
-  "author": "Heeryong Kang",
   "license": "MIT",
+  "author": "Heeryong Kang",
+  "files": [
+    "@types",
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "types": "@types/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "test": "jest --env=node",
