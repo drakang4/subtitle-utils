@@ -2,18 +2,10 @@ import { stripIndents } from "common-tags";
 import { parseTimestamps, toSRTTime, toVTTTime } from "./times";
 
 /**
- * @typedef {Object} Time
- * @property {string} hour
- * @property {string} minute
- * @property {string} second
- * @property {string} millisecond
- */
-
-/**
  * @typedef {Object} ISubtitle
- * @property {Time} start
- * @property {Time} end
- * @property {string} text
+ * @property {number} startTime
+ * @property {number} endTime
+ * @property {string[]} texts
  */
 
 /**
@@ -58,11 +50,9 @@ export default class Subtitle {
       const rows = subtitle.split("\n");
       const [_, time, ...texts] = rows;
 
-      const { start, end } = parseTimestamps(time);
+      const { startTime, endTime } = parseTimestamps(time);
 
-      const text = texts.join("\n");
-
-      return { start, end, text };
+      return { startTime, endTime, texts };
     });
 
     return new Subtitle(subtitles);
@@ -103,11 +93,9 @@ export default class Subtitle {
       const rows = subtitle.split("\n");
       const [time, ...texts] = rows;
 
-      const { start, end } = parseTimestamps(time);
+      const { startTime, endTime } = parseTimestamps(time);
 
-      const text = texts.join("\n");
-
-      return { start, end, text };
+      return { startTime, endTime, texts };
     });
 
     return new Subtitle(subtitles);
@@ -140,8 +128,8 @@ export default class Subtitle {
       .map((subtitle, index) => {
         return stripIndents`
           ${index + 1}
-          ${toSRTTime(subtitle.start)} --> ${toSRTTime(subtitle.end)}
-          ${subtitle.text}
+          ${toSRTTime(subtitle.startTime)} --> ${toSRTTime(subtitle.endTime)}
+          ${subtitle.texts.join("\n")}
         `;
       })
       .join("\n\n")
@@ -165,8 +153,8 @@ export default class Subtitle {
       this.subtitles
         .map(subtitle => {
           return stripIndents`
-            ${toVTTTime(subtitle.start)} --> ${toVTTTime(subtitle.end)}
-            ${subtitle.text}
+            ${toVTTTime(subtitle.startTime)} --> ${toVTTTime(subtitle.endTime)}
+            ${subtitle.texts.join("\n")}
           `;
         })
         .join("\n\n")

@@ -17,16 +17,9 @@ declare class Subtitle {
 }
 
 declare namespace Subtitle {
-  interface ITime {
-    hour: string;
-    minute: string;
-    second: string;
-    millisecond: string;
-  }
-
   interface ISubtitle {
-    start: ITime;
-    end: ITime;
-    text: string;
+    startTime: number;
+    endTime: number;
+    texts: string[];
   }
 }
