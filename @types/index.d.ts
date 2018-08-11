@@ -16,15 +16,17 @@ declare class Subtitle {
   toVTT(): string;
 }
 
-export interface ITime {
-  hour: string;
-  minute: string;
-  second: string;
-  millisecond: string;
-}
+declare namespace Subtitle {
+  interface ITime {
+    hour: string;
+    minute: string;
+    second: string;
+    millisecond: string;
+  }
 
-export interface ISubtitle {
-  start: ITime;
-  end: ITime;
-  text: string;
+  interface ISubtitle {
+    start: ITime;
+    end: ITime;
+    text: string;
+  }
 }
