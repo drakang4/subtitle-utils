@@ -4,11 +4,11 @@ export default [
     external: ["common-tags"],
     output: [
       {
-        file: "dist/bundle.cjs.js",
+        file: "lib/index.js",
         format: "cjs"
       },
       {
-        file: "dist/bundle.es6.js",
+        file: "lib/es/index.js",
         format: "es"
       }
     ]
