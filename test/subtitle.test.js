@@ -28,35 +28,16 @@ test("parse SRT subtitle", () => {
   expect(subtitle).toBeInstanceOf(Subtitle);
   expect(subtitle.subtitles.length).toEqual(2);
 
-  expect(subtitle.subtitles[0].start).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "17",
-    millisecond: "440"
-  });
-  expect(subtitle.subtitles[0].end).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "20",
-    millisecond: "375"
-  });
-  expect(subtitle.subtitles[0].text).toEqual(
-    "Senator, we're making\nour final approach into Coruscant."
-  );
+  expect(subtitle.subtitles[0].startTime).toEqual(137440);
+  expect(subtitle.subtitles[0].endTime).toEqual(140375);
+  expect(subtitle.subtitles[0].texts).toEqual([
+    "Senator, we're making",
+    "our final approach into Coruscant."
+  ]);
 
-  expect(subtitle.subtitles[1].start).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "20",
-    millisecond: "476"
-  });
-  expect(subtitle.subtitles[1].end).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "22",
-    millisecond: "501"
-  });
-  expect(subtitle.subtitles[1].text).toEqual("Very good, Lieutenant.");
+  expect(subtitle.subtitles[1].startTime).toEqual(140476);
+  expect(subtitle.subtitles[1].endTime).toEqual(142501);
+  expect(subtitle.subtitles[1].texts).toEqual(["Very good, Lieutenant."]);
 });
 
 test("parse VTT subtitle", () => {
@@ -65,35 +46,16 @@ test("parse VTT subtitle", () => {
   expect(subtitle).toBeInstanceOf(Subtitle);
   expect(subtitle.subtitles.length).toEqual(2);
 
-  expect(subtitle.subtitles[0].start).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "17",
-    millisecond: "440"
-  });
-  expect(subtitle.subtitles[0].end).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "20",
-    millisecond: "375"
-  });
-  expect(subtitle.subtitles[0].text).toEqual(
-    "Senator, we're making\nour final approach into Coruscant."
-  );
+  expect(subtitle.subtitles[0].startTime).toEqual(137440);
+  expect(subtitle.subtitles[0].endTime).toEqual(140375);
+  expect(subtitle.subtitles[0].texts).toEqual([
+    "Senator, we're making",
+    "our final approach into Coruscant."
+  ]);
 
-  expect(subtitle.subtitles[1].start).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "20",
-    millisecond: "476"
-  });
-  expect(subtitle.subtitles[1].end).toEqual({
-    hour: "00",
-    minute: "02",
-    second: "22",
-    millisecond: "501"
-  });
-  expect(subtitle.subtitles[1].text).toEqual("Very good, Lieutenant.");
+  expect(subtitle.subtitles[1].startTime).toEqual(140476);
+  expect(subtitle.subtitles[1].endTime).toEqual(142501);
+  expect(subtitle.subtitles[1].texts).toEqual(["Very good, Lieutenant."]);
 });
 
 test("transform subtitle to SRT", () => {
