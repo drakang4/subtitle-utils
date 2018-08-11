@@ -3,6 +3,8 @@ export as namespace SubtitleUtils;
 export default Subtitle;
 
 declare class Subtitle {
+  subtitles: Subtitle.ISubtitle[];
+
   constructor(subtitles: Subtitle.ISubtitle[]);
 
   static fromSRT(data: string): Subtitle;
