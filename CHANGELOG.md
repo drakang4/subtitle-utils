@@ -1,4 +1,9 @@
 # Changelog
+
+## 1.1.3
+
+Fixed type declaration file.
+
 ## 1.1.2
 
 Fixed type declaration to be able to access subtitles property.

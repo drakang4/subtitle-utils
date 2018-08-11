@@ -1,6 +1,6 @@
-export as namespace SubtitleUtils;
-
-export default Subtitle;
+declare module "subtitle-utils" {
+  export = Subtitle;
+}
 
 declare class Subtitle {
   subtitles: Subtitle.ISubtitle[];
@@ -16,17 +16,15 @@ declare class Subtitle {
   toVTT(): string;
 }
 
-declare namespace Subtitle {
-  export interface ITime {
-    hour: string;
-    minute: string;
-    second: string;
-    millisecond: string;
-  }
+export interface ITime {
+  hour: string;
+  minute: string;
+  second: string;
+  millisecond: string;
+}
 
-  export interface ISubtitle {
-    start: ITime;
-    end: ITime;
-    text: string;
-  }
+export interface ISubtitle {
+  start: ITime;
+  end: ITime;
+  text: string;
 }
