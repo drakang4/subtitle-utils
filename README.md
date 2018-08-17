@@ -42,6 +42,10 @@ Create a Subtitle instance from SubRip SRT subtitle.
 
 Create a Subtitle instance from WebVTT subtitle.
 
+### `Subtitle.subtitles: ISubtitle[]`
+
+Get array of subtitle object.
+
 ### `Subtitle.toSRT(data: string): string`
 
 Returns SubRip SRT subtitle value.
