@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+* Updated to transforming empty subtitle returns empty string instead of throwing error.
+
 ## 1.2.0
 
 * Use milliseconds to handle time data more flexibly.
