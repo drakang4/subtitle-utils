@@ -121,7 +121,7 @@ export default class Subtitle {
    */
   toSRT() {
     if (!this.subtitles || this.subtitles.length === 0) {
-      throw new Error("Cannot stringify empty subtitle");
+      return "";
     }
 
     const stringified = this.subtitles
@@ -146,7 +146,7 @@ export default class Subtitle {
    */
   toVTT() {
     if (!this.subtitles || this.subtitles.length === 0) {
-      throw new Error("Cannot stringify empty subtitle");
+      return "";
     }
 
     const stringified = "WEBVTT\n\n".concat(

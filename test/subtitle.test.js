@@ -68,6 +68,11 @@ test("transform subtitle to VTT", () => {
   expect(Subtitle.fromSRT(exampleSRT).toVTT()).toEqual(exampleVTT);
 });
 
+test("empty subtitle returns empty string", () => {
+  expect(new Subtitle([]).toSRT()).toEqual("");
+  expect(new Subtitle([]).toVTT()).toEqual("");
+});
+
 test("throw error if not a valid VTT", () => {
   expect(() => {
     Subtitle.fromVTT(exampleSRT);
