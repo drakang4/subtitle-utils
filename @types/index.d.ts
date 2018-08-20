@@ -1,5 +1,5 @@
 declare module "subtitle-utils" {
-  export = Subtitle;
+  export default Subtitle;
 }
 
 declare class Subtitle {

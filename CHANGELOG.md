@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+* Use export default instead of export = in type declaration.
+
 ## 1.2.1
 
 * Updated to transforming empty subtitle returns empty string instead of throwing error.
