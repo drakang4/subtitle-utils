@@ -1,6 +1,9 @@
 declare module "subtitle-utils" {
+  import ISubtitle = Subtitle.ISubtitle;
   export default Subtitle;
+  export { ISubtitle }
 }
+
 
 declare class Subtitle {
   subtitles: Subtitle.ISubtitle[];
@@ -17,7 +20,7 @@ declare class Subtitle {
 }
 
 declare namespace Subtitle {
-  interface ISubtitle {
+  export interface ISubtitle {
     startTime: number;
     endTime: number;
     texts: string[];
