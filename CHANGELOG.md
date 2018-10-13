@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+
+* Fixed index.d.ts
+
 ## 1.2.2
 
 * Use export default instead of export = in type declaration.
